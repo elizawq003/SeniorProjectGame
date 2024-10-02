@@ -35,7 +35,7 @@ On MacOS and Linux, the pre-commit and post-merge files need to be made executab
 > chmod 755 post-merge
 ```
 ## 4. Open the Unity Project
-The project is created using '`2022.3.421`. 
+The project is created using '`2022.3.42f1`. 
 
 ## Video tutorials
 1. Github setup: https://youtu.be/iWniKp_O21o?feature=shared
