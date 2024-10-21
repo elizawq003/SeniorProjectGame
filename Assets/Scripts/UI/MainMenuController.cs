@@ -17,13 +17,13 @@ public class MainMenuController : MonoBehaviour
 
     }
 
-    //load the customize character scene
-    public void Customize()
+    //select the initial character
+    public void InitialCharacter()
     {
 
 
-        //load the main game scene
-        SceneManager.LoadScene("Customize");
+        //load the initial character selection scene
+        SceneManager.LoadScene("InitialCharacter");
 
 
     }
