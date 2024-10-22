@@ -12,7 +12,7 @@ public class StartMenuController : MonoBehaviour
 
 
         //load the main game scene
-        SceneManager.LoadScene("TimedWorkOut");
+        SceneManager.LoadScene("WorkoutScene");
 
 
     }
