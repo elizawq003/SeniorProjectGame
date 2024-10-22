@@ -99,7 +99,7 @@ public class SelectedCharacter : MonoBehaviour
 
     // Method to change between neutral and fighting
     //Call every few seconds
-    public void SetExpression(bool fighting)
+    public void SetExpressionFighting(bool fighting)
     {
         isFighting = fighting;
         UpdateSprite();
