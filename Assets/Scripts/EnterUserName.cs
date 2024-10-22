@@ -6,7 +6,7 @@ namespace SeniorProjectGame.Assets.Scripts
     using UnityEngine.SceneManagement;
     using UnityEngine.UI;
 
-    public class EnterUserNameManager : MonoBehaviour
+    public class EnterUserNameManager : Monobehaviour
     {
         public InputField usernameInputField;
         public Button confirmButton;
