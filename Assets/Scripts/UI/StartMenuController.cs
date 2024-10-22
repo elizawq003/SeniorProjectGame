@@ -4,15 +4,15 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 
-public class MainMenuController : MonoBehaviour
+public class StartMenuController : MonoBehaviour
 {
     //load the workout scene
-    public void WorkOut()
+    public void Start()
     {
 
 
         //load the main game scene
-        SceneManager.LoadScene("WorkOut");
+        SceneManager.LoadScene("TimedWorkOut");
 
 
     }
