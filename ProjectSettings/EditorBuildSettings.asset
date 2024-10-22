@@ -4,17 +4,5 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes:
-  - enabled: 1
-    path: Assets/Scenes/StartMenu.unity
-    guid: 2fde8cfac1e0c411eb692cbf0d37b5d8
-  - enabled: 1
-    path: Assets/Scenes/InitialCharacter.unity
-    guid: 65b0b714547ec46a58f4459d80b92e1b
-  - enabled: 0
-    path: Assets/Scenes/WorkOut.unity
-    guid: 164f9e1b1ebd24e7e8c8285e8ac08ef2
-  - enabled: 1
-    path: Assets/Scenes/TimedWorkout.unity
-    guid: 0b65b13fa8474bf418392fe3436d1b14
+  m_Scenes: []
   m_configObjects: {}
