@@ -3,22 +3,19 @@ namespace SeniorProjectGame.Assets.Scripts
     using UnityEngine;
     using UnityEngine.UI;
 
-    public class ProfileManager
+    public class ProfileManager : MonoBehaviour
     {
-        public class ProfileManager : MonoBehaviour
+        public Text usernameText;
+
+        void Start()
         {
-            public Text usernameText;
+            LoadProfile();
+        }
 
-            void Start()
-            {
-                LoadProfile();
-            }
-
-            void LoadProfile()
-            {
-                string savedUsername = PlayerPrefs.GetString("Username", "New User");
-                usernameText.text = "Welcome, " + savedUsername;
-            }
+        void LoadProfile()
+        {
+            string savedUsername = PlayerPrefs.GetString("Username", "New User");
+            usernameText.text = "Welcome, " + savedUsername;
         }
     }
 }
