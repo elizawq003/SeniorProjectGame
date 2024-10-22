@@ -11,7 +11,7 @@ public class InitialCustomizeController : MonoBehaviour
 
 
         //load the main game scene
-        SceneManager.LoadScene("TimedWorkOut");
+        SceneManager.LoadScene("WorkoutScene");
 
 
     }

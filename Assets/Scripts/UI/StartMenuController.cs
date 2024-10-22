@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class StartMenuController : MonoBehaviour
 {
     //load the workout scene
-    public void Start()
+    public void StartGame()
     {
 
 
