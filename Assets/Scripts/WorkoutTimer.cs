@@ -5,16 +5,17 @@ public class WorkoutTimer : MonoBehaviour
 {
     public TextMeshProUGUI timerText;       // To display the timer
     public TextMeshProUGUI caloriesText;    // To display calories burned
-    public TMP_InputField TimerDurationInput;    // Input field for workout duration
+    public TMP_InputField TimerDurationInput;    // Input field for workout duration (in seconds)
     public GameObject startButton;          // Reference to Start button
     public GameObject cancelButton;         // Reference to Cancel button
 
     private bool isTimerRunning = false;
     private float elapsedTime = 0f;
-    private float timerDuration = 0f;       // Duration from user input
+    private float timerDuration = 0f;       // Timer duration in seconds
     private string selectedExercise;
     private string selectedIntensity;
 
+    // Caloric burn rates (example rates in calories per minute)
     private float runningCalories = 10f;
     private float cyclingCalories = 8f;
     private float swimmingCalories = 9f;
@@ -25,15 +26,17 @@ public class WorkoutTimer : MonoBehaviour
         // Retrieve user data from WorkoutDataManager
         selectedExercise = WorkoutDataManager.instance.selectedExercise;
         selectedIntensity = WorkoutDataManager.instance.selectedIntensity;
+
+        // Hide the calories text at the start
+        caloriesText.gameObject.SetActive(false);
     }
 
     // Called when the user clicks the Start button
     public void StartTimer()
     {
-        // Get the duration from the input field
+        // Get the duration from the input field, in seconds
         if (float.TryParse(TimerDurationInput.text, out timerDuration))
         {
-            timerDuration *= 60; // Convert minutes to seconds
             isTimerRunning = true;
             elapsedTime = 0f; // Reset the elapsed time
             startButton.SetActive(false); // Hide the Start button once timer starts
@@ -49,14 +52,20 @@ public class WorkoutTimer : MonoBehaviour
     {
         if (isTimerRunning)
         {
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.deltaTime; // Increment elapsed time
             UpdateTimerDisplay(timerDuration - elapsedTime);
 
             if (elapsedTime >= timerDuration)
             {
                 isTimerRunning = false;
+
+                // Calculate and display the calories burned
                 float caloriesBurned = CalculateCalories();
                 DisplayCalories(caloriesBurned);
+
+                // Show the calories text when the timer finishes
+                caloriesText.gameObject.SetActive(true);
+
                 cancelButton.SetActive(false);
                 startButton.SetActive(true);
             }
@@ -77,7 +86,7 @@ public class WorkoutTimer : MonoBehaviour
         switch (selectedExercise)
         {
             case "Running":
-                totalCalories = runningCalories * (elapsedTime / 60);
+                totalCalories = runningCalories * (elapsedTime / 60); // per minute
                 break;
             case "Cycling":
                 totalCalories = cyclingCalories * (elapsedTime / 60);
