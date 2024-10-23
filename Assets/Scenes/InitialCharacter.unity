@@ -4406,6 +4406,31 @@ MonoBehaviour:
   - {fileID: 1573526448}
   - {fileID: 1436023934}
   - {fileID: 719850577}
+  GameCharacter:
+  - {fileID: 2053298124, guid: ac9368c0ee183974c91d710f616ad5df, type: 3}
+  - {fileID: 1487548373, guid: b1fad8bb460479943b011c7e5339ca12, type: 3}
+  - {fileID: -227043741, guid: 5e67ad2be787a3d44b3ddc760375e8ba, type: 3}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!1 &1520467291
 GameObject:
   m_ObjectHideFlags: 0

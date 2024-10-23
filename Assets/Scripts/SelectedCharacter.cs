@@ -4,8 +4,12 @@ using System.Collections.Generic;
 public class SelectedCharacter : MonoBehaviour
 {
     // The sprite renderer to show the character.
-    public SpriteRenderer spriteRenderer; 
+    public SpriteRenderer spriteRenderer;
 
+    //Wether the character should show the character fighting or not
+    private bool isFighting;
+
+    /*
     // A dictionary to hold the sprites for each class, skin tone, and expression.
     private Dictionary<string, Dictionary<string, Sprite[]>> classSprites;
 
@@ -48,9 +52,13 @@ public class SelectedCharacter : MonoBehaviour
     public Sprite[] class8SkinTone1Sprites;
     public Sprite[] class8SkinTone2Sprites;
     public Sprite[] class8SkinTone3Sprites;
-
+    */
     void Start()
     {
+        SetSelectedCharacter();
+        isFighting = false;// Start with neutral expression
+    }
+        /*
         // Initialize the dictionary for storing sprites
         classSprites = new Dictionary<string, Dictionary<string, Sprite[]>>();
 
@@ -64,6 +72,9 @@ public class SelectedCharacter : MonoBehaviour
         AddClassSprites("Class7", class7SkinTone1Sprites, class7SkinTone2Sprites, class7SkinTone3Sprites);
         AddClassSprites("Class8", class8SkinTone1Sprites, class8SkinTone2Sprites, class8SkinTone3Sprites);
 
+        
+
+
         //TEMPORARY, THIS SHOULD BE HANDLED IN UPDATE FROM MENU BUT PUTTING THIS IN FOR NOW
         // Set initial class and skin tone
         currentClass = "Class1";
@@ -72,17 +83,21 @@ public class SelectedCharacter : MonoBehaviour
 
         // Update the sprite when the game starts
         UpdateSprite();
-    }
+    }*/
 
-    // Helper function to add class and skin tone sprites to the dictionary
-    private void AddClassSprites(string className, Sprite[] skinTone1Sprites, Sprite[] skinTone2Sprites, Sprite[] skinTone3Sprites)
+        /*
+        // Helper function to add class and skin tone sprites to the dictionary
+        private void AddClassSprites(string className, Sprite[] skinTone1Sprites, Sprite[] skinTone2Sprites, Sprite[] skinTone3Sprites)
     {
         classSprites[className] = new Dictionary<string, Sprite[]>();
         classSprites[className]["Skin1"] = skinTone1Sprites;
         classSprites[className]["Skin2"] = skinTone2Sprites;
         classSprites[className]["Skin3"] = skinTone3Sprites;
-    }
+    }*/
 
+
+
+/*
     // Function to change the class, should be called before run
     public void ChangeClass(string newClass)
     {
@@ -95,15 +110,17 @@ public class SelectedCharacter : MonoBehaviour
     {
         currentSkinTone = newSkinTone;
         UpdateSprite();
-    }
+    }*/
 
+    
     // Method to change between neutral and fighting
     //Call every few seconds
     public void SetExpressionFighting(bool fighting)
     {
         isFighting = fighting;
-        UpdateSprite();
+        //UpdateSprite();
     }
+    /*
 
     // Update the sprite based on current settings
     private void UpdateSprite()
@@ -118,5 +135,17 @@ public class SelectedCharacter : MonoBehaviour
         {
             Debug.LogWarning("No sprite found for the selected class and skin tone.");
         }
+    }*/
+
+    private void SetSelectedCharacter()
+    {
+        if (SelectedCharacterData.SelectedGameCharacter != null)
+        {
+            spriteRenderer.sprite = SelectedCharacterData.SelectedGameCharacter;
+        }
     }
+
+
+
+
 }
