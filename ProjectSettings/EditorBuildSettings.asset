@@ -14,7 +14,13 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/WorkOut.unity
     guid: 164f9e1b1ebd24e7e8c8285e8ac08ef2
-  - enabled: 1
-    path: Assets/Scenes/TimedWorkout.unity
+  - enabled: 0
+    path: Assets/Scenes/DONTUSETimedWorkout.unity
     guid: 0b65b13fa8474bf418392fe3436d1b14
+  - enabled: 1
+    path: Assets/Scenes/WorkoutScene.unity
+    guid: 08a520116f0c8f544b7f616f24116222
+  - enabled: 1
+    path: Assets/Scenes/ExerciseTypeMenu.unity
+    guid: 012d0052f85e88e45a33672e498fcd0f
   m_configObjects: {}
