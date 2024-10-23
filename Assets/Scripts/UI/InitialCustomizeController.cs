@@ -10,8 +10,8 @@ public class InitialCustomizeController : MonoBehaviour
     {
 
 
-        //load the main game scene
-        SceneManager.LoadScene("WorkoutScene");
+        //load the exercise selection type scene
+        SceneManager.LoadScene("ExerciseTypeMenu");
 
 
     }
