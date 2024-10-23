@@ -1,6 +1,6 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
+using UnityEngine.SceneManagement; // For scene switching
 
 public class ExerciseMenu : MonoBehaviour
 {
@@ -8,23 +8,18 @@ public class ExerciseMenu : MonoBehaviour
     public TMP_Dropdown intensityDropdown;  // Dropdown for intensity level
     public GameObject submitButton;         // Reference to Submit button
 
-    private string selectedExercise;        // Store selected exercise type
-    private string selectedIntensity;       // Store selected intensity
-
-    // Method to handle the submission
+    // Called when the user clicks the submit button
     public void OnSubmit()
     {
-        // Get the selected option from the Exercise dropdown
-        selectedExercise = exerciseDropdown.options[exerciseDropdown.value].text;
+        // Get the selected options from the dropdowns
+        string selectedExercise = exerciseDropdown.options[exerciseDropdown.value].text;
+        string selectedIntensity = intensityDropdown.options[intensityDropdown.value].text;
 
-        // Get the selected option from the Intensity dropdown
-        selectedIntensity = intensityDropdown.options[intensityDropdown.value].text;
+        // Save the data to WorkoutDataManager
+        WorkoutDataManager.instance.selectedExercise = selectedExercise;
+        WorkoutDataManager.instance.selectedIntensity = selectedIntensity;
 
-        // Display or process the selected options
-        Debug.Log($"Selected Exercise: {selectedExercise}");
-        Debug.Log($"Selected Intensity: {selectedIntensity}");
-
-        // Load the workout scene (replace "WorkoutScene" with the actual scene name)
+        // Load the next scene (e.g., WorkoutScene)
         SceneManager.LoadScene("WorkoutScene");
     }
 }
