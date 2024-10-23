@@ -29,6 +29,7 @@ public class WorkoutTimer : MonoBehaviour
 
         // Hide the calories text at the start
         caloriesText.gameObject.SetActive(false);
+        cancelButton.SetActive(false); // Hide the cancel button initially
     }
 
     // Called when the user clicks the Start button
@@ -57,17 +58,7 @@ public class WorkoutTimer : MonoBehaviour
 
             if (elapsedTime >= timerDuration)
             {
-                isTimerRunning = false;
-
-                // Calculate and display the calories burned
-                float caloriesBurned = CalculateCalories();
-                DisplayCalories(caloriesBurned);
-
-                // Show the calories text when the timer finishes
-                caloriesText.gameObject.SetActive(true);
-
-                cancelButton.SetActive(false);
-                startButton.SetActive(true);
+                StopTimer();
             }
         }
     }
@@ -78,6 +69,37 @@ public class WorkoutTimer : MonoBehaviour
         int minutes = Mathf.FloorToInt(timeToDisplay / 60);
         int seconds = Mathf.FloorToInt(timeToDisplay % 60);
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+    }
+
+    // Called to stop the timer when it finishes
+    void StopTimer()
+    {
+        isTimerRunning = false;
+
+        // Calculate and display the calories burned
+        float caloriesBurned = CalculateCalories();
+        DisplayCalories(caloriesBurned);
+
+        // Show the calories text when the timer finishes
+        caloriesText.gameObject.SetActive(true);
+
+        cancelButton.SetActive(false);
+        startButton.SetActive(true);
+    }
+
+    // Called when the user clicks the Cancel button
+    public void CancelTimer()
+    {
+        isTimerRunning = false; // Stop the timer
+        elapsedTime = 0f; // Reset the elapsed time
+        UpdateTimerDisplay(timerDuration); // Reset the timer display
+        caloriesText.gameObject.SetActive(false); // Hide calories text
+
+        // Show the Start button again, hide the Cancel button
+        startButton.SetActive(true);
+        cancelButton.SetActive(false);
+
+        Debug.Log("Timer canceled.");
     }
 
     float CalculateCalories()
