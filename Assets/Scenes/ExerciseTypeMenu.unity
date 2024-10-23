@@ -1664,7 +1664,7 @@ Camera:
   m_GameObject: {fileID: 1419555348}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
+  m_ClearFlags: 2
   m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -2282,7 +2282,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exerciseDropdown: {fileID: 1322346881}
   intensityDropdown: {fileID: 2021897319}
-  durationInput: {fileID: 0}
   submitButton: {fileID: 1169174450}
 --- !u!4 &1720510677
 Transform:
