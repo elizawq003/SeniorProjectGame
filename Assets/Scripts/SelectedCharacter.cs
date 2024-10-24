@@ -4,8 +4,25 @@ using System.Collections.Generic;
 public class SelectedCharacter : MonoBehaviour
 {
     // The sprite renderer to show the character.
-    public SpriteRenderer spriteRenderer; 
+    public SpriteRenderer spriteRenderer;
 
+    //Wether the character should show the character fighting or not
+    private bool isFighting;
+
+    //array to hold the neutral and fighting sprite for a character
+    //0 is for netural and 1 is for fighting
+    public Sprite[] characterSprites = new Sprite[2];
+
+    //array to hold the fighting sprite
+    public Sprite[] fightingSprites;
+
+    //array to hold the neutral sprite
+    public Sprite[] neutralSprites;
+
+    //Dictionary to map each neutral sprite to its fighting sprite
+    public Dictionary<Sprite, Sprite> spriteMap = new Dictionary<Sprite, Sprite>();
+
+    /*
     // A dictionary to hold the sprites for each class, skin tone, and expression.
     private Dictionary<string, Dictionary<string, Sprite[]>> classSprites;
 
@@ -48,9 +65,19 @@ public class SelectedCharacter : MonoBehaviour
     public Sprite[] class8SkinTone1Sprites;
     public Sprite[] class8SkinTone2Sprites;
     public Sprite[] class8SkinTone3Sprites;
-
+    */
     void Start()
     {
+        isFighting = false;// Start with neutral expression
+
+        // Create the mapping between neutral and fighting sprites
+        CreateSpriteMap();
+
+
+        SetSelectedCharacter();
+        
+    }
+        /*
         // Initialize the dictionary for storing sprites
         classSprites = new Dictionary<string, Dictionary<string, Sprite[]>>();
 
@@ -64,6 +91,9 @@ public class SelectedCharacter : MonoBehaviour
         AddClassSprites("Class7", class7SkinTone1Sprites, class7SkinTone2Sprites, class7SkinTone3Sprites);
         AddClassSprites("Class8", class8SkinTone1Sprites, class8SkinTone2Sprites, class8SkinTone3Sprites);
 
+        
+
+
         //TEMPORARY, THIS SHOULD BE HANDLED IN UPDATE FROM MENU BUT PUTTING THIS IN FOR NOW
         // Set initial class and skin tone
         currentClass = "Class1";
@@ -72,17 +102,21 @@ public class SelectedCharacter : MonoBehaviour
 
         // Update the sprite when the game starts
         UpdateSprite();
-    }
+    }*/
 
-    // Helper function to add class and skin tone sprites to the dictionary
-    private void AddClassSprites(string className, Sprite[] skinTone1Sprites, Sprite[] skinTone2Sprites, Sprite[] skinTone3Sprites)
+        /*
+        // Helper function to add class and skin tone sprites to the dictionary
+        private void AddClassSprites(string className, Sprite[] skinTone1Sprites, Sprite[] skinTone2Sprites, Sprite[] skinTone3Sprites)
     {
         classSprites[className] = new Dictionary<string, Sprite[]>();
         classSprites[className]["Skin1"] = skinTone1Sprites;
         classSprites[className]["Skin2"] = skinTone2Sprites;
         classSprites[className]["Skin3"] = skinTone3Sprites;
-    }
+    }*/
 
+
+
+/*
     // Function to change the class, should be called before run
     public void ChangeClass(string newClass)
     {
@@ -95,8 +129,9 @@ public class SelectedCharacter : MonoBehaviour
     {
         currentSkinTone = newSkinTone;
         UpdateSprite();
-    }
+    }*/
 
+    
     // Method to change between neutral and fighting
     //Call every few seconds
     public void SetExpressionFighting(bool fighting)
@@ -104,10 +139,22 @@ public class SelectedCharacter : MonoBehaviour
         isFighting = fighting;
         UpdateSprite();
     }
+    
 
     // Update the sprite based on current settings
     private void UpdateSprite()
     {
+        // If fighting, use the fighting sprite, else use the neutral one
+        if (characterSprites != null && characterSprites.Length == 2)
+        {
+            spriteRenderer.sprite = isFighting ? characterSprites[1] : characterSprites[0];
+        }
+        else
+        {
+            Debug.LogWarning("Selected character sprites are not properly set.");
+        }
+
+        /*
         if (classSprites.ContainsKey(currentClass) && classSprites[currentClass].ContainsKey(currentSkinTone))
         {
             Debug.Log("Should be loading sprite");
@@ -117,6 +164,53 @@ public class SelectedCharacter : MonoBehaviour
         else
         {
             Debug.LogWarning("No sprite found for the selected class and skin tone.");
+        }*/
+    }
+
+    
+    private void SetSelectedCharacter()
+    {
+        //set the neutral sprite corresponds to the selected sprite
+        if (SelectedCharacterData.SelectedGameCharacter != null)
+        {
+            
+            characterSprites[0] = SelectedCharacterData.SelectedGameCharacter;
+
+            
+
+            //find the corresponding fighting sprite
+            if(spriteMap.TryGetValue(characterSprites[0], out Sprite correspondingFightingSprite))
+            {
+                characterSprites[1] = correspondingFightingSprite;
+            }
+
+            else
+            {
+                //if the fighting sprite is not found, keep the neutral sprite
+                characterSprites[1] = characterSprites[0];
+            }
+            
+        }
+
+        spriteRenderer.sprite = characterSprites[0];
+    }
+
+    
+
+    // Create the mapping between neutral and fighting sprites
+    private void CreateSpriteMap()
+    {
+        if (neutralSprites.Length == fightingSprites.Length)
+        {
+            for (int i = 0; i < neutralSprites.Length; i++)
+            {
+                spriteMap[neutralSprites[i]] = fightingSprites[i];
+            }
+             
         }
     }
+
+
+
+
 }
