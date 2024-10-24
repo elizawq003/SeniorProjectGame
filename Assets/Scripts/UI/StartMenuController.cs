@@ -11,12 +11,15 @@ public class StartMenuController : MonoBehaviour
     {
 
 
+        /*
         //load the main game scene
         SceneManager.LoadScene("ExerciseTypeMenu");
-
-
+        */
+        //load the initial character selection scene
+        SceneManager.LoadScene("InitialCharacter");
     }
 
+    /*
     //select the initial character
     public void InitialCharacter()
     {
@@ -26,7 +29,7 @@ public class StartMenuController : MonoBehaviour
         SceneManager.LoadScene("InitialCharacter");
 
 
-    }
+    }*/
 
 
 
