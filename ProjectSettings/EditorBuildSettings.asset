@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/ExerciseTypeMenu.unity
     guid: 012d0052f85e88e45a33672e498fcd0f
+  - enabled: 1
+    path: Assets/Scenes/LogInScene.unity
+    guid: 4b152fcf1337e4b03aca24f6ef6cacdc
   m_configObjects: {}

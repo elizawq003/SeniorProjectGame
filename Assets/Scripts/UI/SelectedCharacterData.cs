@@ -5,7 +5,25 @@ using UnityEngine;
 public class SelectedCharacterData : MonoBehaviour
 {
     public static Sprite SelectedGameCharacter;
-    
+
+    private void Start()
+    {
+        // Load player data to get the selected character index
+        SaveSystem saveSystem = FindObjectOfType<SaveSystem>();
+
+        PlayerData playerData = saveSystem.LoadPlayerData();
+
+        if (playerData.selectedCharacterIndex >= 0)
+        {
+            // Set the static selected character sprite based on the saved index
+            InitialCharacterSelection characterSelection = FindObjectOfType<InitialCharacterSelection>();
+
+            SelectedGameCharacter = characterSelection.GameCharacter[playerData.selectedCharacterIndex];
+        }
+
+
+    }
+
 }
 
 

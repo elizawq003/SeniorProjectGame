@@ -14,9 +14,12 @@ public class StartMenuController : MonoBehaviour
         /*
         //load the main game scene
         SceneManager.LoadScene("ExerciseTypeMenu");
-        */
+        
         //load the initial character selection scene
         SceneManager.LoadScene("InitialCharacter");
+        */
+        //load the log in  scene
+        SceneManager.LoadScene("LogInScene");
     }
 
     /*
