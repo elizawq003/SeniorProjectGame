@@ -1,17 +1,17 @@
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class WorkoutTimer : MonoBehaviour
 {
-    public TextMeshProUGUI timerText;       // To display the timer
-    public TextMeshProUGUI caloriesText;    // To display calories burned
-    public TMP_InputField TimerDurationInput;    // Input field for workout duration (in seconds)
-    public GameObject startButton;          // Reference to Start button
-    public GameObject cancelButton;         // Reference to Cancel button
+    public TextMeshProUGUI timerText; // To display the timer
+    public TextMeshProUGUI caloriesText; // To display calories burned
+    public TMP_InputField TimerDurationInput; // Input field for workout duration (in seconds)
+    public GameObject startButton; // Reference to Start button
+    public GameObject cancelButton; // Reference to Cancel button
 
     private bool isTimerRunning = false;
     private float elapsedTime = 0f;
-    private float timerDuration = 0f;       // Timer duration in seconds
+    private float timerDuration = 0f; // Timer duration in seconds
     private string selectedExercise;
     private string selectedIntensity;
 
@@ -24,8 +24,8 @@ public class WorkoutTimer : MonoBehaviour
     void Start()
     {
         // Retrieve user data from WorkoutDataManager
-        selectedExercise = WorkoutDataManager.instance.selectedExercise;
-        selectedIntensity = WorkoutDataManager.instance.selectedIntensity;
+        selectedExercise = WorkoutDataManager.Instance.selectedExercise;
+        selectedIntensity = WorkoutDataManager.Instance.selectedIntensity;
 
         // Hide the calories text at the start
         caloriesText.gameObject.SetActive(false);
@@ -65,7 +65,8 @@ public class WorkoutTimer : MonoBehaviour
 
     void UpdateTimerDisplay(float timeToDisplay)
     {
-        if (timeToDisplay < 0) timeToDisplay = 0;
+        if (timeToDisplay < 0)
+            timeToDisplay = 0;
         int minutes = Mathf.FloorToInt(timeToDisplay / 60);
         int seconds = Mathf.FloorToInt(timeToDisplay % 60);
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);

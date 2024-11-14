@@ -6,25 +6,18 @@ public class SelectedCharacterData : MonoBehaviour
 {
     public static Sprite SelectedGameCharacter;
 
+    public Sprite[] GameCharacter;
+
     private void Start()
     {
-        // Load player data to get the selected character index
-        SaveSystem saveSystem = FindObjectOfType<SaveSystem>();
-
-        PlayerData playerData = saveSystem.LoadPlayerData();
+        PlayerData playerData = SaveSystem.LoadPlayerData();
 
         if (playerData.selectedCharacterIndex >= 0)
         {
-            // Set the static selected character sprite based on the saved index
-            InitialCharacterSelection characterSelection = FindObjectOfType<InitialCharacterSelection>();
-
-            SelectedGameCharacter = characterSelection.GameCharacter[playerData.selectedCharacterIndex];
+            // Use the singleton instance to get the selected character sprite
+            SelectedGameCharacter = InitialCharacterSelection.Instance.GameCharacter[
+                playerData.selectedCharacterIndex
+            ];
         }
-
-
     }
-
 }
-
-
-    

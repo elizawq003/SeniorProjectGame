@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class InitialCharacterSelection : MonoBehaviour
 {
+    public static InitialCharacterSelection Instance { get; private set; }
+
     //selected character
     public Image selectedCharacter;
 
