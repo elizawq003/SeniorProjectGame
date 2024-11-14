@@ -16,14 +16,9 @@ public class InitialCharacterSelection : MonoBehaviour
 
     private PlayerData playerData;
 
-    private SaveSystem saveSystem;
-
     private void Start()
     {
-        // Load player data and save system
-        saveSystem = FindObjectOfType<SaveSystem>();
-
-        playerData = saveSystem.LoadPlayerData();
+        playerData = SaveSystem.LoadPlayerData();
     }
 
     //if a characters is clicked, select the character
@@ -34,14 +29,10 @@ public class InitialCharacterSelection : MonoBehaviour
         // Store the selected character's index in PlayerData
         playerData.selectedCharacterIndex = index;
 
-
         //store the selected characterdata
         SelectedCharacterData.SelectedGameCharacter = GameCharacter[index];
 
         // Save updated player data
-        saveSystem.SavePlayerData(playerData);
-
-
+        SaveSystem.SavePlayerData(playerData);
     }
-
 }

@@ -1,9 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using TMPro;
 
 public class LogInSceneController : MonoBehaviour
 {
@@ -17,9 +17,7 @@ public class LogInSceneController : MonoBehaviour
 
     public TMP_InputField usernameInput;
 
-    [SerializeField] private SaveSystem saveSystem;
-
-
+    [SerializeField]
     // Start is called before the first frame update
     private void Start()
     {
@@ -27,10 +25,10 @@ public class LogInSceneController : MonoBehaviour
         // Initialize the SaveSystem
         saveSystem = new SaveSystem();
         */
-        
 
-            // Load player data to determine if this is a first-time user
-            playerData = saveSystem.LoadPlayerData();
+
+        // Load player data to determine if this is a first-time user
+        playerData = SaveSystem.LoadPlayerData();
 
         // Check if this is a first-time user
         if (playerData.isFirstTimePlayer)
@@ -40,9 +38,7 @@ public class LogInSceneController : MonoBehaviour
 
             // Enable the username input field for first-time users
             usernameInput.gameObject.SetActive(true);
-            
         }
-
         else
         {
             //if not first timer user show welcome back message
@@ -51,7 +47,6 @@ public class LogInSceneController : MonoBehaviour
             // Disable the username input field for returning users
             usernameInput.gameObject.SetActive(false);
         }
-
     }
 
     public void OnContinueButtonClicked()
@@ -66,31 +61,23 @@ public class LogInSceneController : MonoBehaviour
                 return; // Exit if username is empty
             }
 
-
             // Save the entered username and set isFirstTimePlayer to false
             playerData.username = usernameInput.text;
 
             playerData.isFirstTimePlayer = false;
 
             // Save updated data
-            saveSystem.SavePlayerData(playerData);
+            SaveSystem.SavePlayerData(playerData);
 
             Debug.Log("Account created successfully with username: " + playerData.username);
-
 
             //load the initial character selection scene
             SceneManager.LoadScene("InitialCharacter");
         }
-
         else
         {
             //load the exercise type  selection scene for returning users
             SceneManager.LoadScene("ExerciseTypeMenu");
         }
-
-
     }
-
-
-
 }
