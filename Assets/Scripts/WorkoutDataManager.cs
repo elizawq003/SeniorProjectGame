@@ -12,7 +12,7 @@ public class WorkoutDataManager : MonoBehaviour
             exerciseType = exerciseType,
             intensity = intensity,
             duration = 0f,
-            sessionDate = DateTime.Now,
+            sessionDate = System.DateTime.Now,
         };
     }
 

@@ -1,9 +1,10 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 //using JsonUtility to manage player data
-[System.Serializable]
+[Serializable]
 public class PlayerData
 {
     public bool isFirstTimePlayer;
@@ -12,19 +13,20 @@ public class PlayerData
     public List<string> unlockedCharacters;
     public string selectedCharacter;
     public string username;
-
     public int selectedCharacterIndex;
 
     public PlayerData()
     {
-        // Default to true for a new player
+        /* // Default to true for a new player
         isFirstTimePlayer = true;
 
         // Empty until set by user
         username = "";
 
         //no character is seletced initially
-        selectedCharacterIndex = -1;
+        selectedCharacterIndex = -1; */
+        workoutHistory = new List<WorkoutSession>();
+        unlockedCharacters = new List<string>();
     }
 }
 
@@ -35,5 +37,7 @@ public class WorkoutSession
     public int intensity;
     public float duration;
     public int caloriesBurned;
+
+    // causing an error here
     public DateTime sessionDate;
 }

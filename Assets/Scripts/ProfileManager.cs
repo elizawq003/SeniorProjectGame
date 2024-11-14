@@ -1,39 +1,37 @@
-namespace SeniorProjectGame.Assets.Scripts
+using System;
+using UnityEngine;
+using UnityEngine.UI;
+
+public class ProfileManager : MonoBehaviour
 {
-    using UnityEngine;
-    using UnityEngine.UI;
+    public PlayerData playerData;
+    public Text usernameText;
 
-    public class ProfileManager : MonoBehaviour
+    void Start()
     {
-        public PlayerData playerData;
-        public Text usernameText;
+        playerData = SaveSystem.LoadPlayerData();
+    }
 
-        void Start()
-        {
-            playerData = SaveSystem.LoadPlayerData();
-        }
+    public void SaveProfile()
+    {
+        SaveSystem.SavePlayerData(playerData);
+    }
 
-        public void SaveProfile()
-        {
-            SaveSystem.SavePlayerData(playerData);
-        }
+    public void UpdateCurrency(int amount)
+    {
+        playerData.currency += amount;
+        SaveProfile();
+    }
 
-        public void UpdateCurrency(int amount)
-        {
-            playerData.currency += amount;
-            SaveProfile();
-        }
+    public void AddWorkoutSession(WorkoutSession session)
+    {
+        playerData.workoutHistory.Add(session);
+        SaveProfile();
+    }
 
-        public void AddWorkoutSession(WorkoutSession session)
-        {
-            playerData.workoutHistory.Add(session);
-            SaveProfile();
-        }
-
-        void LoadProfile()
-        {
-            string savedUsername = PlayerPrefs.GetString("Username", "New User");
-            usernameText.text = "Welcome, " + savedUsername;
-        }
+    void LoadProfile()
+    {
+        string savedUsername = PlayerPrefs.GetString("Username", "New User");
+        usernameText.text = "Welcome, " + savedUsername;
     }
 }

@@ -1,34 +1,25 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using System.IO;
+using UnityEngine;
 
 //handle saving and loading PlayerData to a JSON file
-public class SaveSystem : MonoBehaviour
+public static class SaveSystem
 {
-    private string filePath;
-
-
-    //define the file path
-    private void Awake()
-    {
-        // Set file path to the persistent data path
-        filePath = Path.Combine(Application.persistentDataPath, "playerData.json");
-
-        Debug.Log("Save path: " + filePath); // Log the file path for debugging
-    }
+    private static string filePath = Path.Combine(
+        Application.persistentDataPath,
+        "playerData.json"
+    );
 
     //save player data to a file
-    public void SavePlayerData(PlayerData player)
+    public static void SavePlayerData(PlayerData player)
     {
-
         // Check if filePath is correctly set
         if (string.IsNullOrEmpty(filePath))
         {
             Debug.LogError("filePath is not set!");
             return;
         }
-
 
         // Convert saved data to JSON
         string json = JsonUtility.ToJson(player, true);
@@ -40,7 +31,7 @@ public class SaveSystem : MonoBehaviour
     }
 
     //load player data from file
-    public PlayerData LoadPlayerData()
+    public static PlayerData LoadPlayerData()
     {
         if (File.Exists(filePath))
         {
@@ -55,6 +46,4 @@ public class SaveSystem : MonoBehaviour
             return new PlayerData();
         }
     }
-
-    
 }
