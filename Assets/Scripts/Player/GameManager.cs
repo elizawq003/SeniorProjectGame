@@ -2,23 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
-
 public class GameManager : MonoBehaviour
 {
-    private SaveSystem saveSystem;
-
     private PlayerData playerData;
-
-    
 
     private void Start()
     {
-
-        saveSystem = new SaveSystem();
+        SaveSystem.LoadPlayerData();
 
         // Load player data to determine if this is a first-time user
-        playerData = saveSystem.LoadPlayerData();
+        playerData = SaveSystem.LoadPlayerData();
 
         // Check if the player is a first-time user
         //create an account if is a first timer user, else load the existing account
@@ -30,20 +23,16 @@ public class GameManager : MonoBehaviour
             playerData = new PlayerData();
 
             // Set up the new account by setting isFirstTimeUser to false
-            playerData.isFirstTimePlayer= false;
+            playerData.isFirstTimePlayer = false;
 
             //save the initial data
-            saveSystem.SavePlayerData(playerData);
+            SaveSystem.SavePlayerData(playerData);
 
             Debug.Log("Account created successfully.");
         }
         else
         {
-            
-
             Debug.Log("Welcome back!");
         }
-
-        
     }
 }
