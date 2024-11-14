@@ -2,24 +2,36 @@ using UnityEngine;
 
 public class WorkoutDataManager : MonoBehaviour
 {
-    public static WorkoutDataManager instance;
+    public ProfileManager profileManager;
+    private WorkoutSession currentWorkout;
 
-    // Variables to store the user's choices
-    public string selectedExercise;
-    public string selectedIntensity;
-    public float workoutDuration; // In seconds
-
-    void Awake()
+    public void StartWorkout(string exerciseType, int intensity)
     {
-        // Singleton pattern to persist data between scenes
-        if (instance == null)
+        currentWorkout = new WorkoutSession
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject); // Prevent this GameObject from being destroyed when loading new scenes
+            exerciseType = exerciseType,
+            intensity = intensity,
+            duration = 0f,
+            sessionDate = DateTime.Now,
+        };
+    }
+
+    public void UpdateWorkoutDuration(float deltaTime)
+    {
+        if (currentWorkout != null)
+        {
+            currentWorkout.duration += deltaTime;
         }
-        else
+    }
+
+    public void EndWorkout(int caloriesBurned)
+    {
+        if (currentWorkout != null)
         {
-            Destroy(gameObject);
+            currentWorkout.caloriesBurned = caloriesBurned;
+            profileManager.AddWorkoutSession(currentWorkout);
+            profileManager.UpdateCurrency(caloriesBurned); // Reward currency based on calories burned
+            currentWorkout = null;
         }
     }
 }
