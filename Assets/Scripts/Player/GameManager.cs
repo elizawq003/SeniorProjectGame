@@ -26,27 +26,34 @@ public class GameManager : MonoBehaviour
         // Load player data to determine if this is a first-time user
         playerData = SaveSystem.LoadPlayerData();
 
-        // Check if the player is a first-time user
-        //create an account if is a first timer user, else load the existing account
+        // create an account if is a first timer user, else load the existing account 
+        // made edits here -- Joonho
         if (playerData.isFirstTimePlayer)
         {
             Debug.Log("Please create an account.");
-
-            //create a new account
-            playerData = new PlayerData();
-
-            // Set up the new account by setting isFirstTimeUser to false
-            playerData.isFirstTimePlayer = false;
-
-            //save the initial data
-            SaveSystem.SavePlayerData(playerData);
-
-            Debug.Log("Account created successfully.");
+            SetupFirstTimeUser();
         }
         else
         {
             Debug.Log("Welcome back!" + playerData.username);
+            LoadReturningUser();
         }
+    }
+
+    // made edits here -- Joonho
+    private void SetupFirstTimeUser()
+    {
+        playerData.isFirstTimePlayer = false;
+        playerData.username = ""; // Prompt for username in the UI
+        playerData.currency = "0";
+        SaveSystem.SavePlayerData(playerData);
+    }
+
+    // made edits here -- Joonho
+    private void LoadReturningUser()
+    {
+        username = playerData.username;
+        userPoints = int.Parse(playerData.currency);
     }
 
     public void AddPoints(int points)
@@ -54,8 +61,11 @@ public class GameManager : MonoBehaviour
         userPoints += points;
     }
 
+    // made edits here -- Joonho
     public void SetUsername(string name)
     {
         username = name;
+        playerData.username = name;
+        SaveSystem.SavePlayerData(playerData);
     }
 }

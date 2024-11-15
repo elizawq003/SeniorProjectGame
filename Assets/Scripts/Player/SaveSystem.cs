@@ -23,9 +23,7 @@ public static class SaveSystem
 
         // Convert saved data to JSON
         string json = JsonUtility.ToJson(player, true);
-
         File.WriteAllText(filePath, json);
-
         Debug.Log("Data saved.");
     }
 

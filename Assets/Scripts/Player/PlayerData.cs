@@ -39,6 +39,11 @@ public class WorkoutSession
     public int intensity;
     public float duration;
     public int caloriesBurned;
+    public string sessionDate = DateTime.Now.ToString("o"); // Store as ISO 8601 string
 
-    public DateTime sessionDate;
+    public DateTime GetSessionDate()
+    {
+        DateTime.TryParse(sessionDate, out var date);
+        return date;
+    }
 }
