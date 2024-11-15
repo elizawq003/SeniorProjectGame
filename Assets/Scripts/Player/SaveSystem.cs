@@ -36,13 +36,13 @@ public static class SaveSystem
         if (File.Exists(filePath))
         {
             string json = File.ReadAllText(filePath);
-
+            Debug.Log("Data loaded from " + filePath);
             return JsonUtility.FromJson<PlayerData>(json);
         }
         else
         {
             // No existing file; return default data for first-time user
-
+            Debug.Log("No existing data found, creating new player data.");
             return new PlayerData();
         }
     }
