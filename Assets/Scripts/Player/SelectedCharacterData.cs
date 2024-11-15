@@ -6,6 +6,10 @@ public class SelectedCharacterData : MonoBehaviour
 {
     public static Sprite SelectedGameCharacter;
 
+    public Sprite[] availableCharacters;
+
+
+    /*
     private void Start()
     {
         // Load player data to get the selected character index
@@ -19,12 +23,39 @@ public class SelectedCharacterData : MonoBehaviour
             InitialCharacterSelection characterSelection = FindObjectOfType<InitialCharacterSelection>();
 
             SelectedGameCharacter = characterSelection.GameCharacter[playerData.selectedCharacterIndex];
-        }
+        }*/
 
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+
+        // Load player data to get the selected character index
+        SaveSystem saveSystem = FindObjectOfType<SaveSystem>();
+
+        PlayerData playerData = saveSystem.LoadPlayerData();
+
+        // Set SelectedGameCharacter based on saved character index in PlayerData
+        if (playerData.selectedCharacterIndex >= 0 &&
+            playerData.selectedCharacterIndex < availableCharacters.Length)
+        {
+            SelectedGameCharacter =
+                availableCharacters[playerData.selectedCharacterIndex];
+        }
+        else
+        {
+            Debug.LogWarning("No valid character");
+        }
 
     }
 
+
 }
+
+
+   
+      
+
+
 
 
     

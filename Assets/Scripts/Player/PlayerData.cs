@@ -12,6 +12,8 @@ public class PlayerData
 
     public int selectedCharacterIndex;
 
+    public int coins;
+
     public PlayerData()
     {
         // Default to true for a new player
@@ -22,6 +24,9 @@ public class PlayerData
 
         //no character is seletced initially
         selectedCharacterIndex = -1;
+
+        //the initial amount of coins is 0
+        coins = 0;
     }
 
 }

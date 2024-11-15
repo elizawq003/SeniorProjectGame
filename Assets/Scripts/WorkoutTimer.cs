@@ -21,6 +21,12 @@ public class WorkoutTimer : MonoBehaviour
     private float swimmingCalories = 9f;
     private float weightliftingCalories = 6f;
 
+    private SaveSystem saveSystem;
+
+    //display coins eared
+    public TextMeshProUGUI totalCoinText;
+    public TextMeshProUGUI earnedCoinText;
+
     void Start()
     {
         // Retrieve user data from WorkoutDataManager
@@ -28,8 +34,14 @@ public class WorkoutTimer : MonoBehaviour
         selectedIntensity = WorkoutDataManager.instance.selectedIntensity;
 
         // Hide the calories text at the start
+        //Hide the coins text at the start
         caloriesText.gameObject.SetActive(false);
+        totalCoinText.gameObject.SetActive(false);
+        earnedCoinText.gameObject.SetActive(false);
         cancelButton.SetActive(false); // Hide the cancel button initially
+
+        saveSystem = new SaveSystem();
+       
     }
 
     // Called when the user clicks the Start button
@@ -80,8 +92,17 @@ public class WorkoutTimer : MonoBehaviour
         float caloriesBurned = CalculateCalories();
         DisplayCalories(caloriesBurned);
 
+        //convert calories to coins
+       float coinsEarned = CaloriesToCoins(caloriesBurned);
+        UpdateCoins(coinsEarned);
+        //DisplayTotalCoins();
+        DisplayEarnedCoins(coinsEarned);
+
         // Show the calories text when the timer finishes
+        //Show the earned coins and total coins text when the timer finishes
         caloriesText.gameObject.SetActive(true);
+        totalCoinText.gameObject.SetActive(true);
+        earnedCoinText.gameObject.SetActive(true);
 
         cancelButton.SetActive(false);
         startButton.SetActive(true);
@@ -94,6 +115,8 @@ public class WorkoutTimer : MonoBehaviour
         elapsedTime = 0f; // Reset the elapsed time
         UpdateTimerDisplay(timerDuration); // Reset the timer display
         caloriesText.gameObject.SetActive(false); // Hide calories text
+        totalCoinText.gameObject.SetActive(false);
+        earnedCoinText.gameObject.SetActive(false);
 
         // Show the Start button again, hide the Cancel button
         startButton.SetActive(true);
@@ -126,5 +149,48 @@ public class WorkoutTimer : MonoBehaviour
     void DisplayCalories(float calories)
     {
         caloriesText.text = $"Calories Burned: {calories:F2}";
+    }
+
+    public float CaloriesToCoins(float calories)
+    {
+        /*
+        //1 coin = 10 calories
+        int conversionRate = 10;
+
+        return Mathf.FloorToInt(calories / conversionRate);
+        */
+        //1 coin = 1 calories
+        return Mathf.FloorToInt(calories);
+
+    }
+
+    public void UpdateCoins(float coinsEarned)
+    {
+        //load player data
+        PlayerData playerData = saveSystem.LoadPlayerData();
+
+        //update coins
+        playerData.coins += (int)coinsEarned;
+
+        //save the update coin data
+        saveSystem.SavePlayerData(playerData);
+
+        Debug.Log("Coins Earned: " + coinsEarned);
+        Debug.Log("Total Coins: " + playerData.coins);
+
+        totalCoinText.text = $"Total Coins: {playerData.coins}";
+    }
+
+    /*
+    public void DisplayTotalCoins()
+    {
+        PlayerData playerData = saveSystem.LoadPlayerData();
+
+        totalCoinText.text = $"Total Coins: {playerData.coins}";
+    }*/
+
+    public void DisplayEarnedCoins(float coinsEarned)
+    {
+        earnedCoinText.text = $"Coins Earned: {coinsEarned}";
     }
 }
