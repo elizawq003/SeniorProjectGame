@@ -5,9 +5,22 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     private PlayerData playerData;
+    public static GameManager instance;
+    public int userPoints = 0;
+    public string username = "";
 
-    private void Start()
+    void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); // Keeps this object across scenes
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         SaveSystem.LoadPlayerData();
 
         // Load player data to determine if this is a first-time user
@@ -32,7 +45,17 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Welcome back!");
+            Debug.Log("Welcome back!" + playerData.username);
         }
+    }
+
+    public void AddPoints(int points)
+    {
+        userPoints += points;
+    }
+
+    public void SetUsername(string name)
+    {
+        username = name;
     }
 }
