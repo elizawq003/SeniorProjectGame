@@ -6,7 +6,7 @@ using UnityEngine;
 //handle saving and loading PlayerData to a JSON file
 public static class SaveSystem
 {
-    private static string filePath = Path.Combine(
+    private static readonly string filePath = Path.Combine(
         Application.persistentDataPath,
         "playerData.json"
     );
@@ -24,7 +24,6 @@ public static class SaveSystem
         // Convert saved data to JSON
         string json = JsonUtility.ToJson(player, true);
 
-        // Write JSON to file
         File.WriteAllText(filePath, json);
 
         Debug.Log("Data saved.");
@@ -36,13 +35,13 @@ public static class SaveSystem
         if (File.Exists(filePath))
         {
             string json = File.ReadAllText(filePath);
-
+            Debug.Log("Data loaded from " + filePath);
             return JsonUtility.FromJson<PlayerData>(json);
         }
         else
         {
             // No existing file; return default data for first-time user
-
+            Debug.Log("No existing file found, new player. Welcome!");
             return new PlayerData();
         }
     }
