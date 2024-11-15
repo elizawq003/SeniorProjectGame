@@ -9,9 +9,11 @@ public class SelectedCharacterData : MonoBehaviour
     public Sprite[] availableCharacters;
 
 
-    /*
-    private void Start()
+
+    private void Awake()
     {
+        DontDestroyOnLoad(gameObject);
+
         // Load player data to get the selected character index
         SaveSystem saveSystem = FindObjectOfType<SaveSystem>();
 
@@ -20,17 +22,32 @@ public class SelectedCharacterData : MonoBehaviour
         if (playerData.selectedCharacterIndex >= 0)
         {
             // Set the static selected character sprite based on the saved index
-            InitialCharacterSelection characterSelection = FindObjectOfType<InitialCharacterSelection>();
+            //InitialCharacterSelection characterSelection = FindObjectOfType<InitialCharacterSelection>();
 
-            SelectedGameCharacter = characterSelection.GameCharacter[playerData.selectedCharacterIndex];
-        }*/
 
+            //SelectedGameCharacter = characterSelection.GameCharacter[playerData.selectedCharacterIndex];
+            SelectedGameCharacter = availableCharacters[playerData.selectedCharacterIndex];
+
+        }
+        else
+        {
+            Debug.LogWarning("No valid character");
+        }
+    }
+
+    /*
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
 
         // Load player data to get the selected character index
         SaveSystem saveSystem = FindObjectOfType<SaveSystem>();
+        if (saveSystem == null)
+        {
+            Debug.LogError("SaveSystem not found in the scene.");
+            return;
+        }
+
 
         PlayerData playerData = saveSystem.LoadPlayerData();
 
@@ -46,7 +63,7 @@ public class SelectedCharacterData : MonoBehaviour
             Debug.LogWarning("No valid character");
         }
 
-    }
+    }*/
 
 
 }
