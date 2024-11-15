@@ -8,12 +8,12 @@ using UnityEngine;
 public class PlayerData
 {
     // made changes -- Joonho
-    public bool isFirstTimePlayer = true;
-    public string currency = "0";
+    public bool isFirstTimePlayer;
+    public string currency;
     public List<WorkoutSession> workoutHistory;
     public List<string> unlockedCharacters;
-    public string selectedCharacter = "";
-    public string username = "";
+    public string selectedCharacter;
+    public string username;
 
     // made changes -- Joonho
     public int selectedCharacterIndex = -1;
