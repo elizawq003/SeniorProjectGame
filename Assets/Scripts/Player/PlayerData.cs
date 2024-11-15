@@ -7,26 +7,24 @@ using UnityEngine;
 [Serializable]
 public class PlayerData
 {
-    // made changes -- Joonho
-    public bool isFirstTimePlayer = true;
-    public string currency = "0";
+    public bool isFirstTimePlayer;
+    public string currency;
     public List<WorkoutSession> workoutHistory;
     public List<string> unlockedCharacters;
-    public string selectedCharacter = "";
-    public string username = "";
-
-    // made changes -- Joonho
-    public int selectedCharacterIndex = -1;
+    public string selectedCharacter;
+    public string username;
+    public int selectedCharacterIndex;
 
     public PlayerData()
     {
+        /* // Default to true for a new player
         isFirstTimePlayer = true;
 
         // Empty until set by user
         username = "";
 
         //no character is seletced initially
-        selectedCharacterIndex = -1;
+        selectedCharacterIndex = -1; */
         workoutHistory = new List<WorkoutSession>();
         unlockedCharacters = new List<string>();
     }
@@ -40,5 +38,6 @@ public class WorkoutSession
     public float duration;
     public int caloriesBurned;
 
+    // causing an error here
     public DateTime sessionDate;
 }
