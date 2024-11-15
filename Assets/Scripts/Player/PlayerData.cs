@@ -14,6 +14,10 @@ public class PlayerData
 
     public int coins;
 
+    public bool[] unlockedCharacters;
+
+    public bool[] unlockedPets;
+
     public PlayerData()
     {
         // Default to true for a new player
@@ -27,6 +31,14 @@ public class PlayerData
 
         //the initial amount of coins is 0
         coins = 0;
+
+        //initially only one charatcer unlocked and no pets unlocked
+        unlockedCharacters = new bool[24] {true,false, false, false, false, false, false, false,
+            false,false,false,false,false,false,false,false,
+        false,false,false,false,false,false,false,false};
+
+        unlockedPets = new bool[8] {false, false, false, false, false, false, false, false };
+
     }
 
 }
