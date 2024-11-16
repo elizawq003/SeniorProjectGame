@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class WorkoutTimer : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class WorkoutTimer : MonoBehaviour
     public TMP_InputField TimerDurationInput;    // Input field for workout duration (in seconds)
     public GameObject startButton;          // Reference to Start button
     public GameObject cancelButton;         // Reference to Cancel button
+
 
     private bool isTimerRunning = false;
     private float elapsedTime = 0f;
@@ -27,6 +29,9 @@ public class WorkoutTimer : MonoBehaviour
     public TextMeshProUGUI totalCoinText;
     public TextMeshProUGUI earnedCoinText;
 
+    public GameObject StorageButton;
+    public GameObject ShopButton;
+
     void Start()
     {
         // Retrieve user data from WorkoutDataManager
@@ -39,6 +44,7 @@ public class WorkoutTimer : MonoBehaviour
         totalCoinText.gameObject.SetActive(false);
         earnedCoinText.gameObject.SetActive(false);
         cancelButton.SetActive(false); // Hide the cancel button initially
+        
 
         saveSystem = new SaveSystem();
        
@@ -54,6 +60,8 @@ public class WorkoutTimer : MonoBehaviour
             elapsedTime = 0f; // Reset the elapsed time
             startButton.SetActive(false); // Hide the Start button once timer starts
             cancelButton.SetActive(true); // Show the Cancel button
+            StorageButton.SetActive(false);
+            ShopButton.SetActive(false);
         }
         else
         {
@@ -106,6 +114,8 @@ public class WorkoutTimer : MonoBehaviour
 
         cancelButton.SetActive(false);
         startButton.SetActive(true);
+        StorageButton.SetActive(true);
+        ShopButton.SetActive(true);
     }
 
     // Called when the user clicks the Cancel button
@@ -121,6 +131,8 @@ public class WorkoutTimer : MonoBehaviour
         // Show the Start button again, hide the Cancel button
         startButton.SetActive(true);
         cancelButton.SetActive(false);
+        StorageButton.SetActive(true);
+        ShopButton.SetActive(true);
 
         Debug.Log("Timer canceled.");
     }
@@ -193,4 +205,20 @@ public class WorkoutTimer : MonoBehaviour
     {
         earnedCoinText.text = $"Coins Earned: {coinsEarned}";
     }
+
+    //load the character storage scene
+    public void toCharacterStorage()
+    {
+        //load the exercise selection type scene
+        SceneManager.LoadScene("CharacterStorage");
+    }
+
+    //load the shop scene
+    public void toShopScene()
+    {
+        //load the shop scene
+        SceneManager.LoadScene("ShopScene");
+    }
+
+
 }

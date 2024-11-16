@@ -84,11 +84,20 @@ public class LogInSceneController : MonoBehaviour
 
         else
         {
-            //load the exercise type  selection scene for returning users
-            SceneManager.LoadScene("ExerciseTypeMenu");
+
+
+            //load the exercise selection type scene for returning users
+            SceneManager.LoadScene("CharacterStorage");
+            
         }
 
 
+    }
+
+    public void BackToStartMenu()
+    {
+        //load the exercise selection type scene
+        SceneManager.LoadScene("StartMenu");
     }
 
 

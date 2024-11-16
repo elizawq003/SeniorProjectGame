@@ -16,4 +16,11 @@ public class InitialCustomizeController : MonoBehaviour
 
     }
 
+    /*
+    //load the character storage scene
+    public void toCharacterStorage()
+    {
+        //load the exercise selection type scene
+        SceneManager.LoadScene("CharacterStorage");
+    }*/
 }

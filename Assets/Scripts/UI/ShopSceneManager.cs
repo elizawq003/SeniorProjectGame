@@ -1,28 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ShopSceneManager : MonoBehaviour
-{
-    //have price labeled under each character
+{ 
 
-    /*
-     * click:
-     * -1. enough money ask if purchase
-     *  - a. purchase -> store in unlocked characters scene and data
-     *  - b. else -> can exit the interactive panel
-     * - 2. not enough money -> different panel (can't purchase
-     */
-
-    // Start is called before the first frame update
-    void Start()
+    //load the character storage scene
+    public void toCharacterStorage()
     {
-        
+        //load the exercise selection type scene
+        SceneManager.LoadScene("CharacterStorage");
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
