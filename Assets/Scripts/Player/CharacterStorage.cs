@@ -82,7 +82,7 @@ public class CharacterStorage : MonoBehaviour
         }
 
         // Highlight the newly selected character
-        characterImages[index].color = Color.green;
+        characterImages[index].color = Color.blue;
 
         //Update the selected character index
         selectedCharacterIndex = index;

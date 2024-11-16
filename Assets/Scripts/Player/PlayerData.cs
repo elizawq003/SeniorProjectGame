@@ -12,6 +12,8 @@ public class PlayerData
 
     public int selectedCharacterIndex;
 
+    public int seletcedPetIndex;
+
     public int coins;
 
     public bool[] unlockedCharacters;
@@ -31,6 +33,9 @@ public class PlayerData
 
         //the initial amount of coins is 0
         coins = 0;
+
+        ////no pet is seletced initially
+        seletcedPetIndex = -1;
 
         //initially only one charatcer unlocked and no pets unlocked
         unlockedCharacters = new bool[24] {true,false, false, false, false, false, false, false,

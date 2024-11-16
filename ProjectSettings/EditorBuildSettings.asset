@@ -35,4 +35,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/PetStorage.unity
     guid: b4d768075a8cf4bf9a2d4155dccd3e56
+  - enabled: 0
+    path: Assets/Scenes/PetStorage 1.unity
+    guid: 4b4ee7ed25a2e4cf5b774420ca5143f2
   m_configObjects: {}
