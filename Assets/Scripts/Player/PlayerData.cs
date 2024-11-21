@@ -61,7 +61,6 @@ public class WorkoutSession
 
     // Calories burned during this workout
     public int caloriesBurned;
-    public string sessionDate = DateTime.Now.ToString("o"); // Store as ISO 8601 string
 
     // The date and time when this workout occurred
     public DateTime sessionDate;

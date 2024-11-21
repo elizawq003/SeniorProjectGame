@@ -7,10 +7,18 @@ public class ProfileManager : MonoBehaviour
 {
     public PlayerData playerData;
     public Text usernameText;
+    public Text levelText;
+    public Text xpText;
 
     void Start()
     {
         playerData = SaveSystem.LoadPlayerData();
+        if (playerData != null)
+        {
+            levelText.text = $"Level: {playerData.level}";
+            xpText.text =
+                $"XP: {playerData.experience}/{GetExperienceForNextLevel(playerData.level)}";
+        }
     }
 
     public void SaveProfile()
@@ -19,7 +27,6 @@ public class ProfileManager : MonoBehaviour
         Debug.Log("Player profile saved.");
     }
 
-
     public void UpdateCurrency(int caloriesBurned)
     {
         int currentCurrency = int.Parse(playerData.currency);
@@ -27,7 +34,6 @@ public class ProfileManager : MonoBehaviour
         playerData.currency = currentCurrency.ToString();
         Debug.Log($"Currency updated: {playerData.currency}");
     }
-
 
     public void AddWorkoutSession(WorkoutSession session)
     {
@@ -40,10 +46,11 @@ public class ProfileManager : MonoBehaviour
         Debug.Log($"Workout session added: {session.exerciseType}");
     }
 
-    public void AddExperience(int xp){
+    public void AddExperience(int xp)
+    {
         playerData.experience += xp;
         int requiredXP = GetExperienceForNextLevel(playerData.level);
-        
+
         while (playerData.experience >= requiredXP)
         {
             playerData.experience -= requiredXP;
@@ -53,9 +60,7 @@ public class ProfileManager : MonoBehaviour
         }
 
         SaveProfile();
-
     }
-
 
     void LoadProfile()
     {
@@ -63,10 +68,8 @@ public class ProfileManager : MonoBehaviour
         usernameText.text = "Welcome, " + savedUsername;
     }
 
-    private int GetExperienceForNextLevel(int level){
-        return 100 + (level - 1) * 50; // whatever just put this here for now
-        
+    private int GetExperienceForNextLevel(int level)
+    {
+        return 100 + (level - 1) * 50; // whatever formula just put this here for now
     }
-
-
 }

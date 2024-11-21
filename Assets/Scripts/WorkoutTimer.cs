@@ -1,6 +1,7 @@
 using System;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WorkoutTimer : MonoBehaviour
 {
@@ -90,7 +91,7 @@ public class WorkoutTimer : MonoBehaviour
 
         int xpEarned = Mathf.CeilToInt(caloriesBurned * 2); // whatever calories burnt
         WorkoutDataManager.Instance.profileManager.AddExperience(xpEarned);
-        
+
         ShowWorkoutRecap(caloriesBurned, xpEarned);
     }
 
@@ -138,6 +139,6 @@ public class WorkoutTimer : MonoBehaviour
     void ShowWorkoutRecap(float calories, int xpEarned)
     {
         caloriesText.text = $"Calories Burned: {calories:F2}, XP Earned: {xpEarned}";
-        Invoke("ReturnToMenu", 3f);
+        SceneManager.LoadScene("ExerciseMenu");
     }
 }
