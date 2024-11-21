@@ -27,12 +27,20 @@ public class PlayerData
     // The index of the selected character in the unlockedCharacters list
     public int selectedCharacterIndex;
 
+    // Player's Level
+    public int level;
+
+    // Player's Experience
+    public int experience;
+
     // Constructor initializes default values for a new player
     public PlayerData()
     {
         isFirstTimePlayer = true;
         username = "";
         currency = "0"; // Default currency value
+        level = 1;
+        experience = 0;
         selectedCharacterIndex = -1; // No character selected initially
         workoutHistory = new List<WorkoutSession>();
         unlockedCharacters = new List<string>();

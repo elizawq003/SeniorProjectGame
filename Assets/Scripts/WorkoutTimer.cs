@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -86,6 +87,11 @@ public class WorkoutTimer : MonoBehaviour
 
         cancelButton.SetActive(false);
         startButton.SetActive(true);
+
+        int xpEarned = Mathf.CeilToInt(caloriesBurned * 2); // whatever calories burnt
+        WorkoutDataManager.Instance.profileManager.AddExperience(xpEarned);
+        
+        ShowWorkoutRecap(caloriesBurned, xpEarned);
     }
 
     // Called when the user clicks the Cancel button
@@ -127,5 +133,11 @@ public class WorkoutTimer : MonoBehaviour
     void DisplayCalories(float calories)
     {
         caloriesText.text = $"Calories Burned: {calories:F2}";
+    }
+
+    void ShowWorkoutRecap(float calories, int xpEarned)
+    {
+        caloriesText.text = $"Calories Burned: {calories:F2}, XP Earned: {xpEarned}";
+        Invoke("ReturnToMenu", 3f);
     }
 }

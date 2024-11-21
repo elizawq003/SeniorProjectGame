@@ -40,11 +40,32 @@ public class ProfileManager : MonoBehaviour
         Debug.Log($"Workout session added: {session.exerciseType}");
     }
 
+    public void AddExperience(int xp){
+        playerData.experience += xp;
+        int requiredXP = GetExperienceForNextLevel(playerData.level);
+        
+        while (playerData.experience >= requiredXP)
+        {
+            playerData.experience -= requiredXP;
+            playerData.level++;
+            Debug.Log($"Level Up! You are now Level {playerData.level}");
+            requiredXP = GetExperienceForNextLevel(playerData.level);
+        }
+
+        SaveProfile();
+
+    }
+
 
     void LoadProfile()
     {
         string savedUsername = PlayerPrefs.GetString("Username", "New User");
         usernameText.text = "Welcome, " + savedUsername;
+    }
+
+    private int GetExperienceForNextLevel(int level){
+        return 100 + (level - 1) * 50; // whatever just put this here for now
+        
     }
 
 
