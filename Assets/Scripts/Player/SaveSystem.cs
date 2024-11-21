@@ -1,48 +1,39 @@
-using System.Collections;
-using System.Collections.Generic;
 using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
-//handle saving and loading PlayerData to a JSON file
 public static class SaveSystem
 {
-    private static readonly string filePath = Path.Combine(
-        Application.persistentDataPath,
-        "playerData.json"
-    );
+    private static readonly string PlayerDataPath = Application.persistentDataPath + "/playerData.dat";
 
-    //save player data to a file
-    public static void SavePlayerData(PlayerData player)
+    // Save player data
+    public static void SavePlayerData(PlayerData playerData)
     {
-        // Check if filePath is correctly set
-        if (string.IsNullOrEmpty(filePath))
+        BinaryFormatter formatter = new BinaryFormatter();
+        using (FileStream fileStream = new FileStream(PlayerDataPath, FileMode.Create))
         {
-            Debug.LogError("filePath is not set!");
-            return;
+            formatter.Serialize(fileStream, playerData);
+            Debug.Log($"Player data saved at: {PlayerDataPath}");
         }
-
-        // Convert saved data to JSON
-        string json = JsonUtility.ToJson(player, true);
-
-        File.WriteAllText(filePath, json);
-
-        Debug.Log("Data saved.");
     }
 
-    //load player data from file
+    // Load player data
     public static PlayerData LoadPlayerData()
     {
-        if (File.Exists(filePath))
+        if (File.Exists(PlayerDataPath))
         {
-            string json = File.ReadAllText(filePath);
-            Debug.Log("Data loaded from " + filePath);
-            return JsonUtility.FromJson<PlayerData>(json);
+            BinaryFormatter formatter = new BinaryFormatter();
+            using (FileStream fileStream = new FileStream(PlayerDataPath, FileMode.Open))
+            {
+                PlayerData data = formatter.Deserialize(fileStream) as PlayerData;
+                Debug.Log("Player data loaded.");
+                return data;
+            }
         }
         else
         {
-            // No existing file; return default data for first-time user
-            Debug.Log("No existing file found, new player. Welcome!");
-            return new PlayerData();
+            Debug.LogError("No save file found at: " + PlayerDataPath);
+            return null;
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,23 +16,36 @@ public class ProfileManager : MonoBehaviour
     public void SaveProfile()
     {
         SaveSystem.SavePlayerData(playerData);
+        Debug.Log("Player profile saved.");
     }
 
-    public void UpdateCurrency(int amount)
+
+    public void UpdateCurrency(int caloriesBurned)
     {
-        playerData.currency += amount;
-        SaveProfile();
+        int currentCurrency = int.Parse(playerData.currency);
+        currentCurrency += caloriesBurned; // Example reward logic
+        playerData.currency = currentCurrency.ToString();
+        Debug.Log($"Currency updated: {playerData.currency}");
     }
+
 
     public void AddWorkoutSession(WorkoutSession session)
     {
+        if (playerData.workoutHistory == null)
+        {
+            playerData.workoutHistory = new List<WorkoutSession>();
+        }
+
         playerData.workoutHistory.Add(session);
-        SaveProfile();
+        Debug.Log($"Workout session added: {session.exerciseType}");
     }
+
 
     void LoadProfile()
     {
         string savedUsername = PlayerPrefs.GetString("Username", "New User");
         usernameText.text = "Welcome, " + savedUsername;
     }
+
+
 }
