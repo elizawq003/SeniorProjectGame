@@ -59,7 +59,13 @@ public class WorkoutSession
     public DateTime sessionDate;
 
     // Constructor for initializing workout session details
-    public WorkoutSession(string exerciseType, int intensity, float duration, int caloriesBurned, DateTime sessionDate)
+    public WorkoutSession(
+        string exerciseType,
+        int intensity,
+        float duration,
+        int caloriesBurned,
+        DateTime sessionDate
+    )
     {
         this.exerciseType = exerciseType;
         this.intensity = intensity;
