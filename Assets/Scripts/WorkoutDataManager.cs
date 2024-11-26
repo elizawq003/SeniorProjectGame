@@ -63,22 +63,33 @@ public class WorkoutDataManager : MonoBehaviour
     }
 
     // Ends the workout session and saves it
-    public void EndWorkout(int caloriesBurned)
+    public void EndWorkout(int caloriesBurnt)
     {
         if (currentWorkout != null)
         {
-            // Finalize workout session
-            currentWorkout.caloriesBurned = caloriesBurned;
+            currentWorkout.caloriesBurned = caloriesBurnt;
 
             // Add the workout session to the player's profile
             profileManager.AddWorkoutSession(currentWorkout);
 
-            // Reward the player with currency based on calories burned
-            profileManager.UpdateCurrency(caloriesBurned);
+            // Update highest calories burnt if this session beats the record
+            if (caloriesBurnt > profileManager.playerData.highestCaloriesBurnt)
+            {
+                profileManager.playerData.highestCaloriesBurnt = caloriesBurnt;
+                Debug.Log($"New record! Highest calories burnt: {caloriesBurnt}");
+            }
 
-            Debug.Log($"Workout ended: {currentWorkout.exerciseType}, Calories: {caloriesBurned}, Duration: {currentWorkout.duration}s");
+            // Update longest workout duration if this session beats the record
+            if (currentWorkout.duration > profileManager.playerData.longestWorkoutDuration)
+            {
+                profileManager.playerData.longestWorkoutDuration = currentWorkout.duration;
+                Debug.Log($"New record! Longest workout duration: {currentWorkout.duration} seconds");
+            }
 
-            // Save updated profile data
+            // Reward the player with currency based on calories burnt
+            profileManager.UpdateCurrency(caloriesBurnt);
+
+            // Save updated player data
             profileManager.SaveProfile();
 
             // Clear the current workout session

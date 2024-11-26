@@ -1,75 +1,128 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class ProfileManager : MonoBehaviour
 {
-    public PlayerData playerData;
-    public Text usernameText;
-    public Text levelText;
-    public Text xpText;
+    public static ProfileManager Instance { get; private set; }
 
-    void Start()
+    public PlayerData playerData;
+
+    private void Awake()
     {
-        playerData = SaveSystem.LoadPlayerData();
-        if (playerData != null)
+        // Singleton pattern to ensure only one ProfileManager exists
+        if (Instance == null)
         {
-            levelText.text = $"Level: {playerData.level}";
-            xpText.text =
-                $"XP: {playerData.experience}/{GetExperienceForNextLevel(playerData.level)}";
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+            LoadProfile(); // Load player data on startup
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
+    // Save the current profile data to persistent storage
     public void SaveProfile()
     {
-        SaveSystem.SavePlayerData(playerData);
-        Debug.Log("Player profile saved.");
+        if (playerData != null)
+        {
+            SaveSystem.SavePlayerData(playerData);
+            Debug.Log("Profile saved successfully.");
+        }
+        else
+        {
+            Debug.LogError("PlayerData is null. Cannot save profile.");
+        }
     }
 
-    public void UpdateCurrency(int caloriesBurned)
+    // Load the profile data from persistent storage
+    public void LoadProfile()
     {
-        int currentCurrency = int.Parse(playerData.currency);
-        currentCurrency += caloriesBurned; // Example reward logic
-        playerData.currency = currentCurrency.ToString();
-        Debug.Log($"Currency updated: {playerData.currency}");
+        playerData = SaveSystem.LoadPlayerData();
+
+        if (playerData == null)
+        {
+            Debug.LogWarning("No save file found. Creating a new profile.");
+            playerData = new PlayerData(); // Initialize a new player profile
+            SaveProfile(); // Save the newly created profile
+        }
+        else
+        {
+            Debug.Log("Profile loaded successfully.");
+        }
     }
 
+    // Add a completed workout session to the player's history
     public void AddWorkoutSession(WorkoutSession session)
     {
-        if (playerData.workoutHistory == null)
+        if (playerData != null)
         {
-            playerData.workoutHistory = new List<WorkoutSession>();
+            if (playerData.workoutHistory == null)
+            {
+                playerData.workoutHistory = new List<WorkoutSession>();
+            }
+
+            // Add the new workout session to the history
+            playerData.workoutHistory.Add(session);
         }
-
-        playerData.workoutHistory.Add(session);
-        Debug.Log($"Workout session added: {session.exerciseType}");
-    }
-
-    public void AddExperience(int xp)
-    {
-        playerData.experience += xp;
-        int requiredXP = GetExperienceForNextLevel(playerData.level);
-
-        while (playerData.experience >= requiredXP)
+        else
         {
-            playerData.experience -= requiredXP;
-            playerData.level++;
-            Debug.Log($"Level Up! You are now Level {playerData.level}");
-            requiredXP = GetExperienceForNextLevel(playerData.level);
+            Debug.LogError("PlayerData is null. Cannot add workout session.");
         }
-
-        SaveProfile();
     }
 
-    void LoadProfile()
+
+    // Update the player's in-game currency based on a reward (e.g., calories burned)
+    public void UpdateCurrency(int amount)
     {
-        string savedUsername = PlayerPrefs.GetString("Username", "New User");
-        usernameText.text = "Welcome, " + savedUsername;
+        if (playerData != null)
+        {
+            if (int.TryParse(playerData.currency, out int currentCurrency))
+            {
+                currentCurrency += amount;
+                playerData.currency = currentCurrency.ToString();
+                Debug.Log($"Currency updated. New balance: {playerData.currency}");
+            }
+            else
+            {
+                Debug.LogError("Currency value is invalid.");
+            }
+        }
+        else
+        {
+            Debug.LogError("PlayerData is null. Cannot update currency.");
+        }
     }
 
-    private int GetExperienceForNextLevel(int level)
+    // Add experience points to the player and handle level-ups
+    public void AddExperience(int expAmount)
     {
-        return 100 + (level - 1) * 50; // whatever formula just put this here for now
+        if (playerData != null)
+        {
+            playerData.experience += expAmount;
+
+            // Check for level-up
+            int requiredExp = GetExperienceForNextLevel(playerData.level);
+            if (playerData.experience >= requiredExp)
+            {
+                playerData.level++;
+                playerData.experience -= requiredExp; // Carry over remaining XP
+                Debug.Log($"Level up! New level: {playerData.level}");
+            }
+
+            Debug.Log($"Experience updated. Current XP: {playerData.experience}, Level: {playerData.level}");
+        }
+        else
+        {
+            Debug.LogError("PlayerData is null. Cannot add experience.");
+        }
+    }
+
+    // Calculate the experience required for the next level (example logic)
+    private int GetExperienceForNextLevel(int currentLevel)
+    {
+        // Example: Required XP increases with the level
+        return currentLevel * 100; // Example formula: 100 XP per level
     }
 }

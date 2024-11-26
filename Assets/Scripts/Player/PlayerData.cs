@@ -33,6 +33,10 @@ public class PlayerData
     // Player's Experience
     public int experience;
 
+    // New fields for tracking records
+    public int highestCaloriesBurnt;       // Highest calories burnt in one session
+    public float longestWorkoutDuration;  // Longest workout duration in seconds
+
     // Constructor initializes default values for a new player
     public PlayerData()
     {
@@ -44,8 +48,27 @@ public class PlayerData
         selectedCharacterIndex = -1; // No character selected initially
         workoutHistory = new List<WorkoutSession>();
         unlockedCharacters = new List<string>();
+
+        // Initialize records
+        highestCaloriesBurnt = 0;
+        longestWorkoutDuration = 0f;
+    }
+
+    // Method to update the highest records based on a completed workout
+    public void UpdateRecords(WorkoutSession session)
+    {
+        if (session.caloriesBurned > highestCaloriesBurnt)
+        {
+            highestCaloriesBurnt = session.caloriesBurned;
+        }
+
+        if (session.duration > longestWorkoutDuration)
+        {
+            longestWorkoutDuration = session.duration;
+        }
     }
 }
+
 
 [Serializable]
 public class WorkoutSession

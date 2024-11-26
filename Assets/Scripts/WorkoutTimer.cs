@@ -1,49 +1,39 @@
-using System;
-using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using TMPro;
 
 public class WorkoutTimer : MonoBehaviour
 {
-    public TextMeshProUGUI timerText; // To display the timer
-    public TextMeshProUGUI caloriesText; // To display calories burned
-    public TMP_InputField TimerDurationInput; // Input field for workout duration (in seconds)
-    public GameObject startButton; // Reference to Start button
-    public GameObject cancelButton; // Reference to Cancel button
+    public TMP_Text timerText;         // To display the countdown timer
+    public TMP_Text caloriesText;     // To display calories burned
+    public TMP_Text highestCaloriesText; // Highest calories burnt display
+    public TMP_Text longestWorkoutText;  // Longest workout display
+
+    public TMP_InputField TimerDurationInput; // Duration input
+    public GameObject startButton;      // Start button
+    public GameObject cancelButton;     // Cancel button
 
     private bool isTimerRunning = false;
     private float elapsedTime = 0f;
-    private float timerDuration = 0f; // Timer duration in seconds
-    private string selectedExercise;
-    private string selectedIntensity;
-
-    // Caloric burn rates (example rates in calories per minute)
-    private float runningCalories = 10f;
-    private float cyclingCalories = 8f;
-    private float swimmingCalories = 9f;
-    private float weightliftingCalories = 6f;
+    private float timerDuration = 0f;
+    private int caloriesBurned = 0;     // Example calories burned (calculation logic not included)
 
     void Start()
     {
-        // Retrieve user data from WorkoutDataManager
-        selectedExercise = WorkoutDataManager.Instance.selectedExercise;
-        selectedIntensity = WorkoutDataManager.Instance.selectedIntensity;
+        // Hide the cancel button initially
+        cancelButton.SetActive(false);
 
-        // Hide the calories text at the start
-        caloriesText.gameObject.SetActive(false);
-        cancelButton.SetActive(false); // Hide the cancel button initially
+        // Update UI with current records at the start
+        UpdateRecordsDisplay();
     }
 
-    // Called when the user clicks the Start button
     public void StartTimer()
     {
-        // Get the duration from the input field, in seconds
         if (float.TryParse(TimerDurationInput.text, out timerDuration))
         {
             isTimerRunning = true;
-            elapsedTime = 0f; // Reset the elapsed time
-            startButton.SetActive(false); // Hide the Start button once timer starts
-            cancelButton.SetActive(true); // Show the Cancel button
+            elapsedTime = 0f; // Reset elapsed time
+            startButton.SetActive(false);
+            cancelButton.SetActive(true);
         }
         else
         {
@@ -55,9 +45,12 @@ public class WorkoutTimer : MonoBehaviour
     {
         if (isTimerRunning)
         {
-            elapsedTime += Time.deltaTime; // Increment elapsed time
+            elapsedTime += Time.deltaTime;
+
+            // Update the timer display
             UpdateTimerDisplay(timerDuration - elapsedTime);
 
+            // Check if the timer has reached its end
             if (elapsedTime >= timerDuration)
             {
                 StopTimer();
@@ -67,78 +60,48 @@ public class WorkoutTimer : MonoBehaviour
 
     void UpdateTimerDisplay(float timeToDisplay)
     {
-        if (timeToDisplay < 0)
-            timeToDisplay = 0;
+        if (timeToDisplay < 0) timeToDisplay = 0;
         int minutes = Mathf.FloorToInt(timeToDisplay / 60);
         int seconds = Mathf.FloorToInt(timeToDisplay % 60);
         timerText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
 
-    // Called to stop the timer when it finishes
     void StopTimer()
     {
         isTimerRunning = false;
 
-        // Calculate and display the calories burned
-        float caloriesBurned = CalculateCalories();
-        DisplayCalories(caloriesBurned);
+        // Example calories burned calculation (replace with your logic)
+        caloriesBurned = Mathf.FloorToInt(timerDuration / 10); // Example: 1 calorie per 10 seconds
 
-        // Show the calories text when the timer finishes
-        caloriesText.gameObject.SetActive(true);
+        // Display calories burned
+        caloriesText.text = $"Calories Burned: {caloriesBurned}";
 
-        cancelButton.SetActive(false);
-        startButton.SetActive(true);
+        // Add the session to the player's profile
+        WorkoutSession session = new WorkoutSession("Running", 2, elapsedTime, caloriesBurned, System.DateTime.Now);
+        ProfileManager.Instance.AddWorkoutSession(session);
 
-        int xpEarned = Mathf.CeilToInt(caloriesBurned * 2); // whatever calories burnt
-        WorkoutDataManager.Instance.profileManager.AddExperience(xpEarned);
+        // Save the updated profile
+        ProfileManager.Instance.SaveProfile();
 
-        ShowWorkoutRecap(caloriesBurned, xpEarned);
-    }
+        // Update the records display
+        UpdateRecordsDisplay();
 
-    // Called when the user clicks the Cancel button
-    public void CancelTimer()
-    {
-        isTimerRunning = false; // Stop the timer
-        elapsedTime = 0f; // Reset the elapsed time
-        UpdateTimerDisplay(timerDuration); // Reset the timer display
-        caloriesText.gameObject.SetActive(false); // Hide calories text
-
-        // Show the Start button again, hide the Cancel button
+        // Reset UI buttons
         startButton.SetActive(true);
         cancelButton.SetActive(false);
-
-        Debug.Log("Timer canceled.");
     }
 
-    float CalculateCalories()
+    public void UpdateRecordsDisplay()
     {
-        float totalCalories = 0f;
-        switch (selectedExercise)
+        // Ensure ProfileManager and PlayerData exist
+        if (ProfileManager.Instance != null && ProfileManager.Instance.playerData != null)
         {
-            case "Running":
-                totalCalories = runningCalories * (elapsedTime / 60); // per minute
-                break;
-            case "Cycling":
-                totalCalories = cyclingCalories * (elapsedTime / 60);
-                break;
-            case "Swimming":
-                totalCalories = swimmingCalories * (elapsedTime / 60);
-                break;
-            case "Weightlifting":
-                totalCalories = weightliftingCalories * (elapsedTime / 60);
-                break;
+            highestCaloriesText.text = $"Highest Calories Burnt: {ProfileManager.Instance.playerData.highestCaloriesBurnt}";
+            longestWorkoutText.text = $"Longest Workout: {ProfileManager.Instance.playerData.longestWorkoutDuration / 60:F2} minutes";
         }
-        return totalCalories;
-    }
-
-    void DisplayCalories(float calories)
-    {
-        caloriesText.text = $"Calories Burned: {calories:F2}";
-    }
-
-    void ShowWorkoutRecap(float calories, int xpEarned)
-    {
-        caloriesText.text = $"Calories Burned: {calories:F2}, XP Earned: {xpEarned}";
-        SceneManager.LoadScene("ExerciseMenu");
+        else
+        {
+            Debug.LogError("ProfileManager or PlayerData is null.");
+        }
     }
 }
