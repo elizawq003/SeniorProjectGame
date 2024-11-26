@@ -6,12 +6,39 @@ using System.IO;
 //handle saving and loading PlayerData to a JSON file
 public class SaveSystem : MonoBehaviour
 {
+    //make sure that save system is implmented as singleton
+    private static SaveSystem instance;
+
     private string filePath;
 
+
+    public static SaveSystem Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                GameObject saveSystemObject = new GameObject("SaveSystem");
+                instance = saveSystemObject.AddComponent<SaveSystem>();
+                DontDestroyOnLoad(saveSystemObject);
+            }
+            return instance;
+        }
+    }
 
     //define the file path
     private void Awake()
     {
+        if(instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         // Set file path to the persistent data path
         filePath = Path.Combine(Application.persistentDataPath, "playerData.json");
 

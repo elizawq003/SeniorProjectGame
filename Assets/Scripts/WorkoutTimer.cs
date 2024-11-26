@@ -46,7 +46,7 @@ public class WorkoutTimer : MonoBehaviour
         cancelButton.SetActive(false); // Hide the cancel button initially
         
 
-        saveSystem = new SaveSystem();
+        saveSystem = SaveSystem.Instance;
        
     }
 
@@ -60,8 +60,8 @@ public class WorkoutTimer : MonoBehaviour
             elapsedTime = 0f; // Reset the elapsed time
             startButton.SetActive(false); // Hide the Start button once timer starts
             cancelButton.SetActive(true); // Show the Cancel button
-            StorageButton.SetActive(false);
-            ShopButton.SetActive(false);
+            StorageButton.SetActive(true);
+            ShopButton.SetActive(true);
         }
         else
         {
