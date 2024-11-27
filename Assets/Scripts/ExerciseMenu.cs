@@ -16,8 +16,8 @@ public class ExerciseMenu : MonoBehaviour
         string selectedIntensity = intensityDropdown.options[intensityDropdown.value].text;
 
         // Save the data to WorkoutDataManager
-        WorkoutDataManager.instance.selectedExercise = selectedExercise;
-        WorkoutDataManager.instance.selectedIntensity = selectedIntensity;
+        WorkoutDataManager.Instance.selectedExercise = selectedExercise;
+        WorkoutDataManager.Instance.selectedIntensity = selectedIntensity;
 
         // Load the next scene (e.g., WorkoutScene)
         SceneManager.LoadScene("WorkoutScene");
