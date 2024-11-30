@@ -1439,7 +1439,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 2043878540}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.25300002
+  m_Size: 0.253
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -1513,23 +1513,23 @@ RectTransform:
   - {fileID: 1817628950}
   - {fileID: 590472535}
   - {fileID: 162040000}
-  - {fileID: 221236397}
   - {fileID: 284082898}
+  - {fileID: 221236397}
   - {fileID: 51800744}
   - {fileID: 11137086}
   - {fileID: 1955317508}
-  - {fileID: 114701969}
   - {fileID: 484360933}
+  - {fileID: 114701969}
   - {fileID: 50407101}
   - {fileID: 389997480}
   - {fileID: 2055070216}
-  - {fileID: 1465471153}
   - {fileID: 1354285778}
+  - {fileID: 1465471153}
   - {fileID: 1817046570}
   - {fileID: 2060837742}
   - {fileID: 1880488193}
-  - {fileID: 1799239051}
   - {fileID: 867114108}
+  - {fileID: 1799239051}
   m_Father: {fileID: 1633044231}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
@@ -2494,8 +2494,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1751742102}
   m_HandleRect: {fileID: 1751742101}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -8285,7 +8285,6 @@ GameObject:
   - component: {fileID: 1392259247}
   - component: {fileID: 1392259250}
   - component: {fileID: 1392259251}
-  - component: {fileID: 1392259252}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -8427,7 +8426,7 @@ MonoBehaviour:
     experience: 0
     highestCaloriesBurnt: 0
     longestWorkoutDuration: 0
-  saveSystem: {fileID: 1392259252}
+  saveSystem: {fileID: 0}
   coinText: {fileID: 53244175}
   characterButtons:
   - {fileID: 652191966}
@@ -8514,14 +8513,14 @@ MonoBehaviour:
   - {fileID: 2060837743}
   - {fileID: 1880488194}
   petPriceTags:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 284082899}
+  - {fileID: 221236398}
+  - {fileID: 484360934}
+  - {fileID: 114701970}
+  - {fileID: 1354285779}
+  - {fileID: 1465471154}
+  - {fileID: 867114109}
+  - {fileID: 1799239052}
   petPrices:
   - 3
   - 3
@@ -8535,18 +8534,6 @@ MonoBehaviour:
   purchasePanelText: {fileID: 265889014}
   notEnoughCoinsPanel: {fileID: 442620869}
   alreadyUnlockedPanel: {fileID: 167284411}
---- !u!114 &1392259252
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1392259245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4696cdc6475714562a721298905cc9af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1416034215
 GameObject:
   m_ObjectHideFlags: 0
@@ -11687,7 +11674,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1473805988}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.10120001
+  m_Size: 0.10119999
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -13304,8 +13291,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 362694880}
   m_HandleRect: {fileID: 362694879}
   m_Direction: 0
-  m_Value: 0
-  m_Size: 1
+  m_Value: 1
+  m_Size: 0.99999994
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

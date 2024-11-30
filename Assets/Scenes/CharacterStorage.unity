@@ -1980,7 +1980,6 @@ GameObject:
   - component: {fileID: 1518895306}
   - component: {fileID: 1518895309}
   - component: {fileID: 1518895311}
-  - component: {fileID: 1518895310}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -2086,18 +2085,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f70f5894ad0654349befb547c173b305, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1518895310
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1518895304}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4696cdc6475714562a721298905cc9af, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1518895311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2123,7 +2110,7 @@ MonoBehaviour:
     experience: 0
     highestCaloriesBurnt: 0
     longestWorkoutDuration: 0
-  saveSystem: {fileID: 1518895310}
+  saveSystem: {fileID: 0}
   characterImages:
   - {fileID: 8699008}
   - {fileID: 371195239}
