@@ -156,6 +156,7 @@ public class ShopSelection : MonoBehaviour
 
     private void UpdateCoins()
     {
-        coinText.text = $"Coins: {playerData.coins}";
+        //Removed the Coins: part as we have graphic for it
+        coinText.text = $"{playerData.coins}";
     }
 }
