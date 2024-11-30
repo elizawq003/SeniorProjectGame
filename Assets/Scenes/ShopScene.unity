@@ -14499,7 +14499,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1392259250}
         m_TargetAssemblyTypeName: ShopSceneManager, Assembly-CSharp
-        m_MethodName: toCharacterStorage
+        m_MethodName: toPetStorage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

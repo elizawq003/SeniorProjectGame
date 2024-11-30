@@ -55,10 +55,24 @@ public class ShopSelection : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // Ensure SaveSystem is initialized
+        if (saveSystem == null)
+        {
+            saveSystem = SaveSystem.Instance;
+        }
+        /*
         // Load player data and save system
         saveSystem = FindObjectOfType<SaveSystem>();
+        */
 
         playerData = saveSystem.LoadPlayerData();
+
+        if(playerData == null)
+        { 
+    
+            Debug.LogError("PlayerData is null");
+            return;
+        }
 
         UpdateCoins();
     }

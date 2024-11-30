@@ -25,15 +25,27 @@ public class PetStorgae : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    {/*
         // Load player data and save system
         saveSystem = FindObjectOfType<SaveSystem>();
+        */
+        if (saveSystem == null)
+        {
+            saveSystem = SaveSystem.Instance;
+        }
 
         playerData = saveSystem.LoadPlayerData();
 
+        if (playerData == null)
+        {
+
+            Debug.LogError("PlayerData is null");
+            return;
+        }
+
+
         updateStoragePanel();
     }
-
 
     private void updateStoragePanel()
     {
@@ -43,7 +55,7 @@ public class PetStorgae : MonoBehaviour
             petImages[i].sprite = petSprites[i];
 
             //If the pet is unlocked, set it to interactable
-            if (playerData.unlockedCharacters[i])
+            if (playerData.unlockedPets[i])
             {
                petImages[i].color = Color.white;
                 petSelection(i);
@@ -71,10 +83,10 @@ public class PetStorgae : MonoBehaviour
 
         petButton.onClick.RemoveAllListeners();
 
-        petButton.onClick.AddListener(() => selectedCharacter(index));
+        petButton.onClick.AddListener(() => selectedPet(index));
     }
 
-    public void selectedCharacter(int index)
+    public void selectedPet(int index)
     {
         if (seletcedPetIndex != -1)
         {
@@ -88,11 +100,11 @@ public class PetStorgae : MonoBehaviour
         //Update the selected character index
         seletcedPetIndex = index;
 
-        playerData.selectedCharacterIndex = index;
+        playerData.seletcedPetIndex = index;
 
         saveSystem.SavePlayerData(playerData);
 
-        Debug.Log($"Character {index} selected!");
+        Debug.Log($"Pet {index} selected!");
     }
 
 }
