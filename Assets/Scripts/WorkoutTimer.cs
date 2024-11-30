@@ -238,19 +238,31 @@ public class WorkoutTimer : MonoBehaviour
 
     public void UpdateCoins(float coinsEarned)
     {
+        /*
         //load player data
         PlayerData playerData = saveSystem.LoadPlayerData();
+        */
+        if (gameManager != null)
+        {
+            playerData = gameManager.GetPlayerData();
 
-        //update coins
-        playerData.coins += (int)coinsEarned;
+            //update coins
+            playerData.coins += (int)coinsEarned;
 
-        //save the update coin data
-        saveSystem.SavePlayerData(playerData);
+            //save the update coin data
+            saveSystem.SavePlayerData(playerData);
 
-        Debug.Log("Coins Earned: " + coinsEarned);
-        Debug.Log("Total Coins: " + playerData.coins);
+            Debug.Log("Coins Earned: " + coinsEarned);
+            Debug.Log("Total Coins: " + playerData.coins);
 
-        totalCoinText.text = $"Total Coins: {playerData.coins}";
+            totalCoinText.text = $"Total Coins: {playerData.coins}";
+        }
+
+        else
+        {
+            Debug.LogError("GameManager is not initialized.");
+        }
+
     }
 
     /*
