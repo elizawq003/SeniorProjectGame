@@ -1618,7 +1618,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1518895309}
         m_TargetAssemblyTypeName: CharacterStorageSceneController, Assembly-CSharp
-        m_MethodName: toShopScene
+        m_MethodName: toPetStorage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2114,9 +2114,15 @@ MonoBehaviour:
     isFirstTimePlayer: 1
     username: 
     selectedCharacterIndex: -1
+    seletcedPetIndex: -1
     coins: 0
     unlockedCharacters: 010000000000000000000000000000000000000000000000
     unlockedPets: 0000000000000000
+    workoutHistory: []
+    level: 1
+    experience: 0
+    highestCaloriesBurnt: 0
+    longestWorkoutDuration: 0
   saveSystem: {fileID: 1518895310}
   characterImages:
   - {fileID: 8699008}

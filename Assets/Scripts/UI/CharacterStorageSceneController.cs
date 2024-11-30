@@ -12,6 +12,14 @@ public class CharacterStorageSceneController : MonoBehaviour
         SceneManager.LoadScene("ShopScene");
     }
 
+    //load the pet storage scene
+
+    public void toPetStorage()
+    {
+        //load the shop scene
+        SceneManager.LoadScene("PetStorage");
+    }
+
     //load the exercise type scene
     public void toExercise()
     {

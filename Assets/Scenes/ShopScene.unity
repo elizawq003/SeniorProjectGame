@@ -8150,6 +8150,11 @@ MonoBehaviour:
     coins: 0
     unlockedCharacters: 010000000000000000000000000000000000000000000000
     unlockedPets: 0000000000000000
+    workoutHistory: []
+    level: 1
+    experience: 0
+    highestCaloriesBurnt: 0
+    longestWorkoutDuration: 0
   saveSystem: {fileID: 1392259252}
   coinText: {fileID: 53244175}
   characterButtons:
@@ -14072,7 +14077,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1392259250}
         m_TargetAssemblyTypeName: ShopSceneManager, Assembly-CSharp
-        m_MethodName: toCharacterStorage
+        m_MethodName: toPetStorage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
