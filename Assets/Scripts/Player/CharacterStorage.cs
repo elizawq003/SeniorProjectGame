@@ -25,10 +25,24 @@ public class CharacterStorage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        /*
         // Load player data and save system
         saveSystem = FindObjectOfType<SaveSystem>();
+        */
+        if (saveSystem == null)
+        {
+            saveSystem = SaveSystem.Instance;
+        }
 
         playerData = saveSystem.LoadPlayerData();
+
+        if (playerData == null)
+        {
+
+            Debug.LogError("PlayerData is null");
+            return;
+        }
+
 
         updateStoragePanel();
     }
