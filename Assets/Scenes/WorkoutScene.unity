@@ -2137,6 +2137,62 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1317560386}
   m_CullTransparentMesh: 1
+--- !u!1 &1353857229
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1353857230}
+  - component: {fileID: 1353857231}
+  m_Layer: 0
+  m_Name: EnemySpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1353857230
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353857229}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -3.5, y: -6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1353857231
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353857229}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4ceca717d0b8d44db209a9b91988a0f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyPrefabs:
+  - {fileID: 8870744894423210745, guid: 21c27aef7f9d1b845b168f29bb6622a7, type: 3}
+  - {fileID: 2404983788436364676, guid: ab36711876bdf174e916214c88f3c9b4, type: 3}
+  - {fileID: 1545721243106902224, guid: aa911df90b1253c41ac1c7f3d530ae2d, type: 3}
+  - {fileID: 529273811624420481, guid: 36c64f778b2b13346b7a89db2f5a20c9, type: 3}
+  - {fileID: 6247721822258976222, guid: e668390457f74b440b926db6ce42193f, type: 3}
+  - {fileID: 3638569950588859043, guid: 08b12322f17507a46aba311deef31fe9, type: 3}
+  - {fileID: 2708013022911357444, guid: 54fdefe8c40e3cc44a010139e097d152, type: 3}
+  - {fileID: 4611154219889822444, guid: 5bf9f80af91e50441854a7c7d9aa450c, type: 3}
+  - {fileID: 4848013728586546338, guid: ce3bacca67e5b014f997cd99d6c21ef0, type: 3}
+  - {fileID: 2521279874680303969, guid: 9cf791081f11bf04d81bfd9dd243d0b5, type: 3}
+  spawnPoint: {fileID: 1353857230}
 --- !u!1 &1372702445
 GameObject:
   m_ObjectHideFlags: 0
@@ -4064,3 +4120,4 @@ SceneRoots:
   - {fileID: 1931202311}
   - {fileID: 164357819}
   - {fileID: 1914791835}
+  - {fileID: 1353857230}
